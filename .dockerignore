@@ -1,0 +1,7 @@
+.idea
+.gitignore
+.DS_Store
+.git
+.cache
+__pycache__/
+.pytest_cache/

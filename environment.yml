@@ -1,0 +1,34 @@
+name: dissertation
+channels:
+  - default
+  - pytorch
+dependencies:
+  - python=3.8
+  - pytorch
+  #- torchvision
+  #- python-graphviz
+  - jupyter
+  - ipykernel
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - numpy
+  - pandas
+  #- psycopg2
+  - pyyaml
+  - pip
+  - pip:
+  #   - schedule
+  #   - awscli
+  #   - boto3
+  #   - pyarrow
+  #   - awswrangler
+    - mlflow
+    - tqdm
+    - graphviz==0.18
+    - torchviz
+    - hiddenlayer
+    # - albumentations
+    # - opencv-python
+
+
