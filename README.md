@@ -1,5 +1,7 @@
 # README
 
+conda environment name: TSCResNet
+
 main library version:
 - python 3.8.2
 - pytorch 1.10.0
@@ -9,13 +11,82 @@ main library version:
 
 ## Conda
 
-conda env remove -n dissertation
+conda update conda
 
 conda env create -f environment.yml
 
+conda env remove -n dissertation
+
 conda env update --file environment.yml --prune
 
+conda activate TSCResNet
+
 ## Docker
+
+### Build
+
+```
+docker build -t tsc-resnet .
+```
+
+## Commands
+
+### Local deployment (run the deployment app from Local env to launch resources in AWS)
+
+```
+docker build -t tsc-resnet . && docker run -e AWS_DEFAULT_REGION=us-gov-west-1 -e AWS_ACCESS_KEY_ID=<> -e AWS_SECRET_ACCESS_KEY=<> -e S3_CONFIG_URL=s3://<path to config>/app_config.yaml -e ENVIRONMENT=<DEV, TEST, or PROD> -e DEPLOYMENT=<CREATE or DELETE> tsc-resnet
+```
+
+### Push a Docker Image to AWS ECR
+
+```
+aws ecr get-login-password --region us-gov-west-1 | docker login --username AWS --password-stdin 649705058163.dkr.ecr.us-gov-west-1.amazonaws.com
+
+docker build -t tsc-resnet .
+
+docker tag tsc-resnet:<VERSION> 649705058163.dkr.ecr.us-gov-west-1.amazonaws.com/tsc-resnet:<VERSION>
+
+docker push 649705058163.dkr.ecr.us-gov-west-1.amazonaws.com/tsc-resnet:<VERSION>
+```
+
+### Deploy Commands
+
+```
+aws ecr get-login-password --region us-gov-west-1 | docker login --username AWS --password-stdin 649705058163.dkr.ecr.us-gov-west-1.amazonaws.com
+
+docker pull 649705058163.dkr.ecr.us-gov-west-1.amazonaws.com/tsc-resnet:<VERSION>
+
+docker run --rm 649705058163.dkr.ecr.us-gov-west-1.amazonaws.com/tsc-resnet:<VERSION>
+```
+
+### AWS ECR/ECS deployment
+
+```
+docker run -d --rm tsc-resnet:<VERSION>
+```
+
+## Docker - misc
+#### List & Remove all stopped containers
+```
+docker container ls
+docker rm $(docker ps -a -q)
+```
+
+#### List & Remove all dangling images
+```
+docker images
+docker image prune
+```
+
+#### Remove Specific Images
+```
+docker image rm <ImageName>
+```  
+
+#### Remove All Images
+```
+docker rmi $(docker images -a -q)
+```  
 
 ## MLFLOW
 
@@ -50,3 +121,12 @@ Delete local:
 
 Delete remote
 ```git push origin --delete <branch>```
+
+
+### Launch a Jupyter Notebook environment (needs Dockerfile modification)
+
+```
+#In Dockerfile, uncomment:
+#ENTRYPOINT source activate <environment name: defined in environment.yml> && jupyter notebook --ip=0.0.0.0 --port=8889 --no-browser --allow-root
+```
+

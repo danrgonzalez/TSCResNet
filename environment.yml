@@ -1,4 +1,4 @@
-name: dissertation
+name: TSCResNet
 channels:
   - default
   - pytorch
@@ -25,9 +25,9 @@ dependencies:
   #   - awswrangler
     - mlflow
     - tqdm
-    - graphviz==0.18
-    - torchviz
-    - hiddenlayer
+    # - graphviz==0.18
+    # - torchviz
+    # - hiddenlayer
     # - albumentations
     # - opencv-python
 
