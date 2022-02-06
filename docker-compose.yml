@@ -1,0 +1,20 @@
+version: '2'
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ENVIRONMENT=DEV
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile-test
+    environment:
+      - ENVIRONMENT=TEST
+  # prod:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile-prod
+  #   environment:
+  #     - ENVIRONMENT=PROD

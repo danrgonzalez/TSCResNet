@@ -19,6 +19,6 @@ WORKDIR /
 
 #ENTRYPOINT source activate TSCResNet && jupyter notebook
 
-#ENTRYPOINT source activate TSCResNet && python test/test.py
+ENTRYPOINT source activate TSCResNet && python test/test.py
 
 #ENTRYPOINT source activate TSCResNet && python app/main.py
