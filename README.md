@@ -1,6 +1,7 @@
 # README
 
 conda environment name: TSCResNet
+docker image name: tsc-resnet
 
 main library version:
 - python 3.8.2
