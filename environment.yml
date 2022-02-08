@@ -23,6 +23,7 @@ dependencies:
   #   - boto3
   #   - pyarrow
   #   - awswrangler
+    - pytest
     - mlflow
     - tqdm
     # - graphviz==0.18

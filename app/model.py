@@ -1,10 +1,10 @@
 import time
-from config import NUM_CLASSES
+from .config import NUM_CLASSES
 
 import torch
 import torch.nn as nn
 
-from architecture import config
+from .architecture import config
 
 class CNNBlock(nn.Module):
 
@@ -57,7 +57,7 @@ class ResidualBlock(nn.Module):
 
 class PredictionBlock(nn.Module): #Conv layers reshaped for prediction
 
-    def __init__(self, in_channels, num_classes = 18):
+    def __init__(self, in_channels, num_classes = 18, DEBUG = False):
 
         super().__init__()
 
@@ -67,22 +67,26 @@ class PredictionBlock(nn.Module): #Conv layers reshaped for prediction
         )
         self.num_classes = num_classes
 
+        self.DEBUG = DEBUG
+
     def forward(self, x):
 
-        if DEBUG:
+        if self.DEBUG:
             print ('Prediction Block Shape, before Reshaping:', self.pred(x).shape)
 
         return self.pred(x).reshape(x.shape[0], self.num_classes)
 
 class TSCResNet(nn.Module):
 
-    def __init__(self, in_channels = 3):
+    def __init__(self, in_channels = 3, DEBUG = False):
 
         super().__init__()
 
         self.in_channels = in_channels #gets updated throughout the passes/layers
 
         self.layers = self._create_layers()
+
+        self.DEBUG = DEBUG
 
     def _create_layers(self):
 
@@ -120,38 +124,16 @@ class TSCResNet(nn.Module):
 
         for layer in self.layers:
 
-            if DEBUG:
+            if self.DEBUG:
                 print ('~~~~~~~~~~~~~~~~~~~~')
                 print ('Input to Block shape: ', x.shape)
 
             x = layer(x)
 
-            if DEBUG:
+            if self.DEBUG:
                 print (layer)
                 print ('Output of Block shape: ', x.shape)
                 print ('~~~~~~~~~~~~~~~~~~~~')
                 print ('')
 
         return x
-
-if __name__ == '__main__':
-
-    DEBUG = True
-
-    samples, features, timesteps = 16, 40, 172
-
-    x = torch.randn((samples, features, timesteps)) #1 batch
-
-    print ('INPUT SHAPE: ', x.shape)
-
-    model = TSCResNet(in_channels = features)
-
-    t0 = time.time()
-
-    out = model(x)
-
-    print ('OUTPUT SHAPE: ', out.shape)
-
-    print ('Time: ', time.time() - t0)
-
-    print("DONE")

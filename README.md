@@ -10,6 +10,12 @@ main library version:
 - pip 21.2.4
 - conda 4.10.3
 
+## .zshrc
+
+see .zshrc
+    - defines conda w/python3
+    - defines homebrew source
+
 ## Conda
 
 conda update conda
@@ -22,6 +28,8 @@ conda env update --file environment.yml --prune
 
 conda activate TSCResNet
 
+conda env export > environment_20220207.yml
+
 ## Docker
 
 ### Build
@@ -30,7 +38,13 @@ conda activate TSCResNet
 docker build -t tsc-resnet .
 ```
 
-## Commands
+### Tests
+
+```
+python -m pytest
+```
+
+## Deployment Commands
 
 ### Local deployment (run the deployment app from Local env to launch resources in AWS)
 
@@ -66,7 +80,7 @@ docker run --rm 649705058163.dkr.ecr.us-gov-west-1.amazonaws.com/tsc-resnet:<VER
 docker run -d --rm tsc-resnet:<VERSION>
 ```
 
-## Docker - misc
+## Docker - Some useful commands
 #### List & Remove all stopped containers
 ```
 docker container ls
