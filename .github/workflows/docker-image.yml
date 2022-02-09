@@ -27,5 +27,5 @@ jobs:
     name: Build Stage
     runs-on: ubuntu-latest
     steps:
-      - Build the Docker Image
-      run: docker build . --file Dockerfile --tag tsc-resnet:latest
+      - name: Build the Docker Image
+        run: docker build . --file Dockerfile --tag tsc-resnet:latest
