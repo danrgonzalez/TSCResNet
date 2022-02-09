@@ -24,4 +24,4 @@ jobs:
       run: docker-compose run test
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag tsc-resnet:$(date +%s)
+      run: docker build . --file Dockerfile --tag tsc-resnet:latest
