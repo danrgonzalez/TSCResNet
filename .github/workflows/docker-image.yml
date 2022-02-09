@@ -27,5 +27,6 @@ jobs:
     name: Build Stage
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Build the Docker Image
-        run: docker build . --file Dockerfile --tag tsc-resnet:latest
+        run: docker build --file Dockerfile --tag tsc-resnet:latest .
