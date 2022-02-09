@@ -8,7 +8,7 @@ on:
     
 jobs:
   test:
-    name: Run test suite
+    name: Run Tests
     runs-on: ubuntu-latest
     env:
       COMPOSE_FILE: docker-compose.yml
@@ -23,5 +23,9 @@ jobs:
     - name: Run tests
       run: docker-compose run test
 
-    - name: Build the Docker image
+  build:
+    name: Build Stage
+    runs-on: ubuntu-latest
+    steps:
+      - Build the Docker Image
       run: docker build . --file Dockerfile --tag tsc-resnet:latest

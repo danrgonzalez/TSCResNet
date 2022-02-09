@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   dev:
     build:
@@ -12,6 +12,7 @@ services:
       dockerfile: Dockerfile-test
     environment:
       - ENVIRONMENT=TEST
+    working_dir: /tests
   # prod:
   #   build:
   #     context: .

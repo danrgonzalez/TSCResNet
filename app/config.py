@@ -1,7 +1,7 @@
 #from utils import seed_everything
 import json
 
-with open('/Users/dgonzalez/Documents/dissertation/activity_to_encoding_map.txt', 'r') as f:
+with open('/app/activity_to_encoding_map.txt', 'r') as f:
     one_hot_labels = json.loads(f.read())
     
 ONE_HOT_LABELS = {int(key):one_hot_labels[key].replace('activity_','') for key in one_hot_labels.keys()}
