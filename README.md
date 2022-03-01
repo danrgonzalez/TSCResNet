@@ -16,6 +16,11 @@ see .zshrc
     - defines conda w/python3
     - defines homebrew source
 
+## homebrew 
+
+brew update
+brew upgrade
+
 ## Conda
 
 conda update conda
