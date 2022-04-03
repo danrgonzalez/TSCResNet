@@ -18,7 +18,7 @@ see .zshrc
 
 ## homebrew 
 
-brew update
+brew update  
 brew upgrade
 
 ## Conda
@@ -113,6 +113,9 @@ docker rmi $(docker images -a -q)
 mlflow ui --backend-store-uri /Users/dgonzalez/Documents/dissertation/mlruns/
 
 ## Git
+
+```git config --list```
+
 ```git log```
 
 ```git add . && git commit -m "message" && git push```
