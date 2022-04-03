@@ -122,6 +122,9 @@ mlflow ui --backend-store-uri /Users/dgonzalez/Documents/dissertation/mlruns/
 
 ```git branch -a```
 
+### Github PAT update
+Once the personal access token expires, regenrate the token on github.com, save it, attempt to push and a prompt should come up where you can enter the updated token.
+
 ### Creating New Branches
 ```
 git branch <branch>
