@@ -54,29 +54,29 @@ python -m pytest
 ### Local deployment (run the deployment app from Local env to launch resources in AWS)
 
 ```
-docker build -t tsc-resnet . && docker run -e AWS_DEFAULT_REGION=us-gov-west-1 -e AWS_ACCESS_KEY_ID=<> -e AWS_SECRET_ACCESS_KEY=<> -e S3_CONFIG_URL=s3://<path to config>/app_config.yaml -e ENVIRONMENT=<DEV, TEST, or PROD> -e DEPLOYMENT=<CREATE or DELETE> tsc-resnet
+docker build -t tsc-resnet . && docker run -e AWS_DEFAULT_REGION=<AWS_REGION> -e AWS_ACCESS_KEY_ID=<> -e AWS_SECRET_ACCESS_KEY=<> -e S3_CONFIG_URL=s3://<path to config>/app_config.yaml -e ENVIRONMENT=<DEV, TEST, or PROD> -e DEPLOYMENT=<CREATE or DELETE> tsc-resnet
 ```
 
 ### Push a Docker Image to AWS ECR
 
 ```
-aws ecr get-login-password --region us-gov-west-1 | docker login --username AWS --password-stdin 649705058163.dkr.ecr.us-gov-west-1.amazonaws.com
+aws ecr get-login-password --region <AWS_REGION> | docker login --username AWS --password-stdin <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com
 
 docker build -t tsc-resnet .
 
-docker tag tsc-resnet:<VERSION> 649705058163.dkr.ecr.us-gov-west-1.amazonaws.com/tsc-resnet:<VERSION>
+docker tag tsc-resnet:<VERSION> <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/tsc-resnet:<VERSION>
 
-docker push 649705058163.dkr.ecr.us-gov-west-1.amazonaws.com/tsc-resnet:<VERSION>
+docker push <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/tsc-resnet:<VERSION>
 ```
 
 ### Deploy Commands
 
 ```
-aws ecr get-login-password --region us-gov-west-1 | docker login --username AWS --password-stdin 649705058163.dkr.ecr.us-gov-west-1.amazonaws.com
+aws ecr get-login-password --region <AWS_REGION> | docker login --username AWS --password-stdin <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com
 
-docker pull 649705058163.dkr.ecr.us-gov-west-1.amazonaws.com/tsc-resnet:<VERSION>
+docker pull <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/tsc-resnet:<VERSION>
 
-docker run --rm 649705058163.dkr.ecr.us-gov-west-1.amazonaws.com/tsc-resnet:<VERSION>
+docker run --rm <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/tsc-resnet:<VERSION>
 ```
 
 ### AWS ECR/ECS deployment
