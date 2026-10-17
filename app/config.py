@@ -1,14 +1,19 @@
 #from utils import seed_everything
 import json
+import os
 
-with open('/app/activity_to_encoding_map.txt', 'r') as f:
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+
+with open(os.path.join(APP_DIR, 'activity_to_encoding_map.txt'), 'r') as f:
     one_hot_labels = json.loads(f.read())
     
 ONE_HOT_LABELS = {int(key):one_hot_labels[key].replace('activity_','') for key in one_hot_labels.keys()}
 #print (ONE_HOT_LABELS)
 
 DATASET = 'PAMAP2'
-DATA_DIR = '/Users/dgonzalez/Documents/dissertation/'
+# Preprocessed PAMAP2 windows, checkpoints (models/) and MLflow runs (mlruns/) live here.
+# Override with TSC_DATA_DIR; the trailing separator is required by the path concatenation below.
+DATA_DIR = os.path.join(os.environ.get('TSC_DATA_DIR', os.path.join(os.path.dirname(APP_DIR), 'data')), '')
 
 TIMESTEPS = 172
 FEATURES = 40

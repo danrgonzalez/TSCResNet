@@ -58,7 +58,8 @@ class PAMAP2Dataset(Dataset):
 
 def test():
 
-    data_dir = '/Users/dgonzalez/Documents/dissertation/'
+    import config
+    data_dir = config.DATA_DIR
 
     #dataset = PAMAP2Dataset(data_dir, 'train', label = None)
     #dataset = PAMAP2Dataset(data_dir, 'train', label = 'Nordic walking')
