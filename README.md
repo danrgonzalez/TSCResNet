@@ -35,7 +35,7 @@ conda env create -f environment.yml
 conda activate TSCResNet
 ```
 
-`environment.yml` lists the direct dependencies (Python 3.8, PyTorch, scikit-learn, MLflow, pytest). `environment_20220207.yml` is the fully pinned environment used for the published experiments.
+`environment.yml` lists the direct dependencies (Python 3.8, PyTorch, scikit-learn, MLflow, pytest). `environment_20220207.yml` is a fully pinned export of the environment from February 2022.
 
 ## Train
 
