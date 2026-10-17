@@ -1,3 +1,4 @@
+import os
 from tqdm import tqdm
 
 import config
@@ -160,7 +161,7 @@ def test():
 
     print ('LOADING MODEL!')
     load_checkpoint(
-        '/Users/dgonzalez/Documents/dissertation/models/%s'%(BEST_MODEL_PATH), 
+        os.path.join(config.DATA_DIR, 'models', BEST_MODEL_PATH),
         model, 
         optimizer, 
         config.LEARNING_RATE

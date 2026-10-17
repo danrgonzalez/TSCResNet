@@ -5,28 +5,28 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-    
+
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
-    env:
-      COMPOSE_FILE: docker-compose.yml
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v7
 
-    - name: Build docker images
-      run: docker-compose build
+      - name: Build test image
+        run: docker compose build test
 
-    - name: Run tests
-      run: docker-compose run test
+      - name: Run tests
+        run: docker compose run --rm test
 
   build:
     name: Build Stage
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
       - name: Build the Docker Image
         run: docker build --file Dockerfile --tag tsc-resnet:latest .
